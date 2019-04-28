@@ -50,8 +50,8 @@ PreparedStatement pst;
     
     public void Table2(){
         try{
-            Class.forName("");
-    Connection conn=DriverManager.getConnection("");
+            Class.forName("com.mysql.jdbc.Driver");
+    Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","kevine","2001.kevI.");
           String sql="select ACC,NAME,MICR_NO,BALANCE From BALANCES";
           pst=conn.prepareStatement(sql);
           rs=pst.executeQuery();
@@ -637,9 +637,20 @@ PreparedStatement pst;
         jLabel30.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel30.setText("Total");
 
+        jTextField27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField27ActionPerformed(evt);
+            }
+        });
+
         jTextField28.setEditable(false);
 
         jTextField29.setEditable(false);
+        jTextField29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField29ActionPerformed(evt);
+            }
+        });
 
         jTextField30.setEditable(false);
 
@@ -1020,7 +1031,7 @@ PreparedStatement pst;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)
                         .addGap(21, 21, 21))
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE)))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1057,8 +1068,8 @@ PreparedStatement pst;
         // TODO add your handling code here:
         String sql="select * from ACCOUNT where NAME=?";
         try{
-            Class.forName("");
-    Connection conn=DriverManager.getConnection("");
+            Class.forName("com.mysql.jdbc.Driver");
+    Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","kevine","2001.kevI.");
            pst=conn.prepareStatement(sql);
            pst.setString(1, jTextField1.getText());
            rs=pst.executeQuery();
@@ -1067,7 +1078,6 @@ PreparedStatement pst;
                jTextField3.setText(add1);
                String add2=rs.getString("ACC");
                jTextField8.setText(add2);
-               String add3=rs.getString("DOB");
 //               jTextField4.setText(add3);
                String add4=rs.getString("ACC_TYPE");
                jTextField9.setText(add4);
@@ -1111,8 +1121,8 @@ PreparedStatement pst;
           String value5=jTextField11.getText();
           String value6=jTextField12.getText();
           String value7=jTextField1.getText();
-          Class.forName("");
-    Connection conn=DriverManager.getConnection("");
+          Class.forName("com.mysql.jdbc.Driver");
+    Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","kevine","2001.kevI.");
           String sql="update ACCOUNT set NATIONALITY='"+value1+"',GENDER='"+value2+"',ADDRESS='"+value3+"',CASTE='"+value4+"',MOB='"+value5+"',SEC_Q='"+value6+"' where NAME='"+value7+"'";
           pst=conn.prepareStatement(sql);
           pst.execute();
@@ -1126,8 +1136,8 @@ PreparedStatement pst;
         // TODO add your handling code here:
         String sql="select * from BALANCE where NAME=?";
         try{
-            Class.forName("");
-    Connection conn=DriverManager.getConnection("");
+            Class.forName("com.mysql.jdbc.Driver");
+    Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","kevine","2001.kevI.");
             pst=conn.prepareStatement(sql);
             pst.setString(1, jTextField13.getText());
             rs=pst.executeQuery();
@@ -1175,8 +1185,8 @@ PreparedStatement pst;
         try{
           String value1=jTextField13.getText();  
           String value2=jTextField18.getText(); 
-          Class.forName("");
-    Connection conn=DriverManager.getConnection("");
+          Class.forName("com.mysql.jdbc.Driver");
+    Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","kevine","2001.kevI.");
           String sql="update BALANCES set BALANCE='"+value2+"' where NAME='"+value1+"'";
           pst=conn.prepareStatement(sql);
           pst.execute();
@@ -1198,8 +1208,8 @@ PreparedStatement pst;
         // TODO add your handling code here:
         String sql="select * from BALANCES where NAME=?";
         try{
-            Class.forName("");
-    Connection conn=DriverManager.getConnection("");
+            Class.forName("com.mysql.jdbc.Driver");
+    Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","kevine","2001.kevI.");
             pst=conn.prepareStatement(sql);
             pst.setString(1, jTextField19.getText());
             rs=pst.executeQuery();
@@ -1260,8 +1270,8 @@ PreparedStatement pst;
     
     public void Account(){
         try{
-            Class.forName("");
-    Connection conn=DriverManager.getConnection("");
+            Class.forName("com.mysql.jdbc.Driver");
+    Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","kevine","2001.kevI.");
             String sql="select * from BALANCES";
             pst=conn.prepareStatement(sql);
             rs=pst.executeQuery();
@@ -1278,8 +1288,8 @@ PreparedStatement pst;
     private void jComboBox1PopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jComboBox1PopupMenuWillBecomeInvisible
         // TODO add your handling code here:
         try{
-            Class.forName("");
-    Connection conn=DriverManager.getConnection("");
+            Class.forName("com.mysql.jdbc.Driver");
+    Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","kevine","2001.kevI.");
           String a1=(String) jComboBox1.getSelectedItem();
           String sql="select * from BALANCES where ACC=?";
           pst=conn.prepareStatement(sql);
@@ -1298,8 +1308,8 @@ PreparedStatement pst;
      try{
          String value1=(String) jComboBox1.getSelectedItem();
          String value2=jTextField26.getText();
-         Class.forName("");
-    Connection conn=DriverManager.getConnection("");
+         Class.forName("com.mysql.jdbc.Driver");
+    Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","kevine","2001.kevI.");
          String sql="update BALANCES set BALANCE='"+value2+"' where ACC='"+value1+"'";
          pst=conn.prepareStatement(sql);
          pst.execute();
@@ -1386,7 +1396,7 @@ PreparedStatement pst;
             String a1=jTextField27.getText();
             String a2=jTextField32.getText();
             Class.forName("");
-    Connection conn=DriverManager.getConnection("");
+    Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank\",\"kevine\",\"2001.kevI.");
             String sql="update BALANCES set BALANCE='"+a2+"' where NAME='"+a1+"'";
             pst=conn.prepareStatement(sql);
             pst.execute();
@@ -1444,6 +1454,14 @@ PreparedStatement pst;
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jTextField27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField27ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField27ActionPerformed
+
+    private void jTextField29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField29ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField29ActionPerformed
 
     /**
      * @pa args the command line arguments
