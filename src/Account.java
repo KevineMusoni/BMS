@@ -3,21 +3,24 @@ import java.sql.*;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
 /**
  *
- * @author Kevine 
+ * @author Kevine
  */
 public class Account extends javax.swing.JFrame {
-Connection conn;
-ResultSet rs;
-PreparedStatement pst;
+
+    Connection conn;
+    ResultSet rs;
+    PreparedStatement pst;
+
     /**
      * Creates new form Account
      */
     public Account() {
         super("Create Account");
         initComponents();
-       // conn=javaconnect.ConnecrDb();
+        // conn=javaconnect.ConnecrDb();
         RandomAcc();
         RandomMICR();
         RandomPIN();
@@ -97,6 +100,12 @@ PreparedStatement pst;
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Pin");
+
+        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField7ActionPerformed(evt);
+            }
+        });
 
         jTextField2.setEditable(false);
 
@@ -312,48 +321,46 @@ PreparedStatement pst;
         setSize(new java.awt.Dimension(657, 464));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    
-    public void Bal(){
-        String sql="insert into BALANCES(NAME,ACC,MICR_NO,BALANCE) values (?,?,?,?)";
-        try{
+
+    public void Bal() {
+        String sql = "insert into BALANCES(NAME,ACC,MICR_NO,BALANCE) values (?,?,?,?)";
+        try {
 //            connection to the db
-            Class.forName("com.mysql.jdbc.Driver");
-    Connection conn= DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","kevine","2001.kevI.");
-//            Class.forName("");
-//    Connection conn=DriverManager.getConnection("");
-            pst=conn.prepareStatement(sql);
-            pst.setString(1,jTextField5.getText());
-            pst.setString(2,jTextField1.getText());
-            pst.setString(3,jTextField2.getText());
-            pst.setString(4,jTextField10.getText());
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "kevine", "2001.kevI.");
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, jTextField5.getText());
+            pst.setString(2, jTextField1.getText());
+            pst.setString(3, jTextField2.getText());
+            pst.setString(4, jTextField10.getText());
             pst.execute();
-        }catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-        Authentication ob=new Authentication();
+        Authentication ob = new Authentication();
         ob.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public void RandomAcc(){
-        Random ra=new Random();
-        jTextField1.setText(""+ra.nextInt(10000+1));
+    public void RandomAcc() {
+        Random ra = new Random();
+        jTextField1.setText("" + ra.nextInt(10000 + 1));
     }
-    
-    public void RandomMICR(){
-        Random ra=new Random();
-        jTextField2.setText(""+ra.nextInt(1000+1));
+
+    public void RandomMICR() {
+        Random ra = new Random();
+        jTextField2.setText("" + ra.nextInt(1000 + 1));
     }
-    
-    public void RandomPIN(){
-        Random ra=new Random();
-        jTextField3.setText(""+ra.nextInt(1000+1));
+
+    public void RandomPIN() {
+        Random ra = new Random();
+        jTextField3.setText("" + ra.nextInt(1000 + 1));
     }
-    
+
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         jTextField1.setText("");
@@ -369,41 +376,49 @@ PreparedStatement pst;
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String sql="insert into ACCOUNT(ACC,NAME,PIN,ACC_TYPE,NATIONALITY,CASTE,MICR_NO,GENDER,MOB,ADDRESS,SEC_Q,SEC_A,BALANCE) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        try{
+        String sql = "insert into ACCOUNT(ACC,NAME,PIN,ACC_TYPE,NATIONALITY,CASTE,MICR_NO,GENDER,MOB,ADDRESS,SEC_Q,SEC_A,BALANCE) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        try {
 //           send data to the db
-            Class.forName("com.mysql.jdbc.Driver");
-      Connection conn= DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","kevine","2001.kevI.");
+           // Class.forName("com.mysql.cj.jdbc.Driver");
+          System.out.println("connected");
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "kevine", "2001.kevI.");
 //            Class.forName("");
 //    Connection conn=DriverManager.getConnection("");
-    
-          pst=conn.prepareStatement(sql);
-          pst.setString(1,jTextField1.getText());
-          pst.setString(2,jTextField5.getText());
+//
+            PreparedStatement pstx = con.prepareStatement(sql);
+            System.out.println("prepared");
+            pstx.setString(1, jTextField1.getText());
+            pstx.setString(2, jTextField5.getText());
 //          pst.setString(3, ((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText());
-          pst.setString(4,jTextField3.getText());
-          pst.setString(5, (String) jComboBox1.getSelectedItem());
-          pst.setString(6, (String) jComboBox2.getSelectedItem());
-          pst.setString(7,jTextField6.getText());
-          pst.setString(8,jTextField2.getText());
-          
-          jRadioButton1.setActionCommand("Male");
-          jRadioButton2.setActionCommand("Female");
-          pst.setString(9,buttonGroup1.getSelection().getActionCommand());
-          
-          pst.setString(10,jTextField7.getText());
-          pst.setString(11,jTextField4.getText());
-          pst.setString(12, (String) jComboBox3.getSelectedItem());
-          pst.setString(13,jTextField9.getText());
-          pst.setString(14,jTextField10.getText());
-          pst.execute();
-          JOptionPane.showMessageDialog(null, "Congrtz\n Account has been Created");
-          Bal();
-        }catch(Exception e){
+//pstx.setString(3, "first rand text");
+            pstx.setString(3, jTextField3.getText());
+            pstx.setString(4, (String) jComboBox1.getSelectedItem());
+            pstx.setString(5, (String) jComboBox2.getSelectedItem());
+            pstx.setString(6, jTextField6.getText());
+            pstx.setString(7, jTextField2.getText());
+            System.out.println("ok");
+//
+            jRadioButton1.setActionCommand("Male");
+            jRadioButton2.setActionCommand("Female");
+           //pstx.setString(9, buttonGroup1.getSelection().getActionCommand());
+            pstx.setString(8, jTextField7.getText());
+            pstx.setString(9, jTextField4.getText());
+            pstx.setString(10, (String) jComboBox3.getSelectedItem());
+            pstx.setString(11, jTextField9.getText());
+            pstx.setString(12, jTextField10.getText());
+            pstx.setString(13, "random text");
+            pstx.execute();
+            JOptionPane.showMessageDialog(null, "Congrtz\n Account has been Created");
+            Bal();
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField7ActionPerformed
 
     public static void main(String args[]) {
         try {
