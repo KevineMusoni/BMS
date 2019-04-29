@@ -159,10 +159,10 @@ PreparedStatement pst;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         try{
-          Class.forName("");
-    Connection conn=DriverManager.getConnection("");
+          Class.forName("com.mysql.cj.jdbc.Driver");
+    Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "kevine", "2001.kevI.");
        // Statement st=con.createStatement();
-              String sql="select * from LOGINCHECK where USERID=? and USERPASSWORD=?";
+              String sql="select * from Account where acc=? and pin=?";
  
        pst=conn.prepareStatement(sql);
          // int rs=st.executeUpdate("delete  from userregister where userid='"+s+"'");

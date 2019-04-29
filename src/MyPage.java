@@ -27,8 +27,8 @@ PreparedStatement pst;
     
     public void Table1(){
         try{
-          String sql="select Acc,Name,ACC_TYPE,GENDER,MOB From ACCOUNT";
-          Class.forName("com.mysql.jdbc.Driver");
+          String sql="select Acc,Name,ACC_TYPE,GENDER,MOB From Account";
+          Class.forName("com.mysql.cj.jdbc.Driver");
     Connection conn= DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","kevine","2001.kevI.");
 //          Class.forName("");
 //    Connection conn=DriverManager.getConnection("");
@@ -50,9 +50,9 @@ PreparedStatement pst;
     
     public void Table2(){
         try{
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
     Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","kevine","2001.kevI.");
-          String sql="select ACC,NAME,MICR_NO,BALANCE From BALANCES";
+          String sql="select ACC,NAME,MICR_NO,BALANCE From Balance";
           pst=conn.prepareStatement(sql);
           rs=pst.executeQuery();
           jTable2.setModel(DbUtils.resultSetToTableModel(rs));
@@ -1066,9 +1066,9 @@ PreparedStatement pst;
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String sql="select * from ACCOUNT where NAME=?";
+        String sql="select * from Account where NAME=?";
         try{
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
     Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","kevine","2001.kevI.");
            pst=conn.prepareStatement(sql);
            pst.setString(1, jTextField1.getText());
@@ -1121,9 +1121,9 @@ PreparedStatement pst;
           String value5=jTextField11.getText();
           String value6=jTextField12.getText();
           String value7=jTextField1.getText();
-          Class.forName("com.mysql.jdbc.Driver");
+          Class.forName("com.mysql.cj.jdbc.Driver");
     Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","kevine","2001.kevI.");
-          String sql="update ACCOUNT set NATIONALITY='"+value1+"',GENDER='"+value2+"',ADDRESS='"+value3+"',CASTE='"+value4+"',MOB='"+value5+"',SEC_Q='"+value6+"' where NAME='"+value7+"'";
+          String sql="update Account set NATIONALITY='"+value1+"',GENDER='"+value2+"',ADDRESS='"+value3+"',CASTE='"+value4+"',MOB='"+value5+"',SEC_Q='"+value6+"' where NAME='"+value7+"'";
           pst=conn.prepareStatement(sql);
           pst.execute();
           JOptionPane.showMessageDialog(null, "Profile Updated");
@@ -1134,9 +1134,9 @@ PreparedStatement pst;
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        String sql="select * from BALANCE where NAME=?";
+        String sql="select * from Account where name=?";
         try{
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
     Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","kevine","2001.kevI.");
             pst=conn.prepareStatement(sql);
             pst.setString(1, jTextField13.getText());
@@ -1184,10 +1184,10 @@ PreparedStatement pst;
         // TODO add your handling code here:
         try{
           String value1=jTextField13.getText();  
-          String value2=jTextField18.getText(); 
-          Class.forName("com.mysql.jdbc.Driver");
+          String value2=jTextField17.getText(); 
+          Class.forName("com.mysql.cj.jdbc.Driver");
     Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","kevine","2001.kevI.");
-          String sql="update BALANCES set BALANCE='"+value2+"' where NAME='"+value1+"'";
+          String sql="update Account set Balance='"+value2+"' where NAME='"+value1+"'";
           pst=conn.prepareStatement(sql);
           pst.execute();
           JOptionPane.showMessageDialog(null, "Sucessfully Deposited");
@@ -1206,7 +1206,7 @@ PreparedStatement pst;
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        String sql="select * from BALANCES where NAME=?";
+        String sql="select * from Account where name=?";
         try{
             Class.forName("com.mysql.jdbc.Driver");
     Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","kevine","2001.kevI.");
@@ -1270,9 +1270,9 @@ PreparedStatement pst;
     
     public void Account(){
         try{
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
     Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","kevine","2001.kevI.");
-            String sql="select * from BALANCES";
+            String sql="select * from Balance";
             pst=conn.prepareStatement(sql);
             rs=pst.executeQuery();
             while(rs.next()){
@@ -1291,7 +1291,7 @@ PreparedStatement pst;
             Class.forName("com.mysql.jdbc.Driver");
     Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","kevine","2001.kevI.");
           String a1=(String) jComboBox1.getSelectedItem();
-          String sql="select * from BALANCES where ACC=?";
+          String sql="select * from Balance where ACC=?";
           pst=conn.prepareStatement(sql);
           pst.setString(1, a1);
           rs=pst.executeQuery();
@@ -1307,13 +1307,15 @@ PreparedStatement pst;
  public void TransferC(){
      try{
          String value1=(String) jComboBox1.getSelectedItem();
-         String value2=jTextField26.getText();
-         Class.forName("com.mysql.jdbc.Driver");
+         String value2= jTextField26.getText();
+         int newvar=Integer.parseInt(value2);
+         
+         Class.forName("com.mysql.cj.jdbc.Driver");
     Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","kevine","2001.kevI.");
-         String sql="update BALANCES set BALANCE='"+value2+"' where ACC='"+value1+"'";
+         String sql="update Balance set Balance='"+ newvar+"' where ACC='"+value1+"'";
          pst=conn.prepareStatement(sql);
          pst.execute();
-         JOptionPane.showMessageDialog(null, "Seuccesfully Transfered");
+         JOptionPane.showMessageDialog(null, "Succesfully Transfered");
      }catch(Exception e){
          JOptionPane.showMessageDialog(null, e);
      }
@@ -1323,9 +1325,9 @@ PreparedStatement pst;
      try{
         String value1=jTextField19.getText(); 
         String value2=jTextField24.getText();
-        Class.forName("");
-    Connection conn=DriverManager.getConnection("");
-        String sql="update BALANCES set BALANCE='"+value2+"' where NAME='"+value1+"'";
+        Class.forName("com.mysql.cj.jdbc.Driver");
+    Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","kevine","2001.kevI.");
+        String sql="update Balance set Balance='"+value2+"' where NAME='"+value1+"'";
         pst=conn.prepareStatement(sql);
         pst.execute();
      }catch(Exception e){
@@ -1342,10 +1344,10 @@ PreparedStatement pst;
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
-        String sql="select * from BALANCES where NAME=?";
+        String sql="select * from Account where name=?";
         try{
-            Class.forName("");
-    Connection conn=DriverManager.getConnection("");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+    Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","kevine","2001.kevI.");
             pst=conn.prepareStatement(sql);
             pst.setString(1, jTextField27.getText());
             rs=pst.executeQuery();
@@ -1395,9 +1397,9 @@ PreparedStatement pst;
         try{
             String a1=jTextField27.getText();
             String a2=jTextField32.getText();
-            Class.forName("");
-    Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank\",\"kevine\",\"2001.kevI.");
-            String sql="update BALANCES set BALANCE='"+a2+"' where NAME='"+a1+"'";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+    Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","kevine","2001.kevI.");
+            String sql="update Balance set Balance='"+a2+"' where NAME='"+a1+"'";
             pst=conn.prepareStatement(sql);
             pst.execute();
             JOptionPane.showMessageDialog(null, "Withdraw Successful");
@@ -1408,10 +1410,10 @@ PreparedStatement pst;
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         // TODO add your handling code here:
-        String sql="select * from BALANCES where NAME=?";
+        String sql="select * from Account where name=?";
         try{
-            Class.forName("");
-    Connection conn=DriverManager.getConnection("");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+    Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","kevine","2001.kevI.");
             pst=conn.prepareStatement(sql);
             pst.setString(1, jTextField33.getText());
             rs=pst.executeQuery();
@@ -1444,9 +1446,9 @@ PreparedStatement pst;
         try{
           String value1=jTextField1.getText();
           String value2=jTextField42.getText();
-          Class.forName("");
-    Connection conn=DriverManager.getConnection("");
-          String sql="update ACCOUNT set PIN='"+value2+"' where NAME='"+value1+"'";
+          Class.forName("com.mysql.cj.jdbc.Driver");
+    Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","kevine","2001.kevI.");
+          String sql="update Account set PIN='"+value2+"' where NAME='"+value1+"'";
           pst=conn.prepareStatement(sql);
           pst.execute();
           JOptionPane.showMessageDialog(null, "Pin Successfully Changed");

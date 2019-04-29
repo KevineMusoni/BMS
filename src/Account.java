@@ -376,7 +376,7 @@ public class Account extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String sql = "insert into ACCOUNT(ACC,NAME,PIN,ACC_TYPE,NATIONALITY,CASTE,MICR_NO,GENDER,MOB,ADDRESS,SEC_Q,SEC_A,BALANCE) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into Account(ACC,NAME,PIN,ACC_TYPE,NATIONALITY,CASTE,MICR_NO,GENDER,MOB,ADDRESS,SEC_Q,SEC_A,BALANCE) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
 //           send data to the db
            // Class.forName("com.mysql.cj.jdbc.Driver");
@@ -406,7 +406,7 @@ public class Account extends javax.swing.JFrame {
             pstx.setString(10, (String) jComboBox3.getSelectedItem());
             pstx.setString(11, jTextField9.getText());
             pstx.setString(12, jTextField10.getText());
-            pstx.setString(13, "random text");
+            pstx.setString(13, "1");
             pstx.execute();
             JOptionPane.showMessageDialog(null, "Congrtz\n Account has been Created");
             Bal();
